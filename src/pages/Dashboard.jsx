@@ -47,7 +47,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/dashboard');
+        const response = await fetch('https://coffee-inventory-backend.onrender.com/api/dashboard');
         if (!response.ok) {
           const errData = await response.json().catch(() => ({}));
           throw new Error(errData.detail || `Server error: ${response.status}`);
@@ -79,7 +79,7 @@ const Dashboard = () => {
 
     const newQuantity = product.onHand + parseInt(quantity);
     try {
-      const response = await fetch(`http://localhost:8000/api/products/${product.sku}`, {
+      const response = await fetch(`https://coffee-inventory-backend.onrender.com/api/products/${product.sku}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ on_hand: newQuantity })
@@ -107,7 +107,7 @@ const Dashboard = () => {
 
     const newQuantity = Math.max(0, product.onHand - parseInt(quantity));
     try {
-      const response = await fetch(`http://localhost:8000/api/products/${product.sku}`, {
+      const response = await fetch(`https://coffee-inventory-backend.onrender.com/api/products/${product.sku}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ on_hand: newQuantity })
@@ -128,7 +128,7 @@ const Dashboard = () => {
 
   const handleAddIngredient = async (newProduct) => {
     try {
-      const response = await fetch('http://localhost:8000/api/products', {
+      const response = await fetch('https://coffee-inventory-backend.onrender.com/api/products', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newProduct)
@@ -154,7 +154,7 @@ const Dashboard = () => {
 
   const handleTransfer = async (transferData) => {
     try {
-      const response = await fetch('http://localhost:8000/api/transfer', {
+      const response = await fetch('https://coffee-inventory-backend.onrender.com/api/transfer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(transferData)
@@ -176,7 +176,7 @@ const Dashboard = () => {
       setRecentOps([formattedOp, ...recentOps.slice(0, 4)]);
       
       // Refresh dashboard data to update stock levels
-      const dashboardResponse = await fetch('http://localhost:8000/api/dashboard');
+      const dashboardResponse = await fetch('https://coffee-inventory-backend.onrender.com/api/dashboard');
       if (dashboardResponse.ok) {
         const updatedDashboardData = await dashboardResponse.json();
         setDashboardData(updatedDashboardData);
@@ -192,7 +192,7 @@ const Dashboard = () => {
 
   const handleScheduleReorder = async (sku, date) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/products/${sku}`, {
+      const response = await fetch(`https://coffee-inventory-backend.onrender.com/api/products/${sku}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ reorder_date: date })

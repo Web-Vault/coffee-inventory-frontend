@@ -35,7 +35,7 @@ const AIAssistant = ({ replies, defaultReply, addItems, removeItems, dashboardDa
     }
 
     // Call backend AI endpoint
-    fetch('http://localhost:8000/api/parser/query', {
+    fetch('https://coffee-inventory-backend.onrender.com/api/parser/query', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: q })
